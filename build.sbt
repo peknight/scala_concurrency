@@ -15,7 +15,11 @@ resolvers ++= Seq(
 
 libraryDependencies += "commons-io" % "commons-io" % "2.4"
 
-fork := true
+libraryDependencies += "org.scala-lang.modules" %% "scala-async" % "0.9.7"
+
+libraryDependencies += "org.scalaz" %% "scalaz-concurrent" % "7.2.27"
+
+fork := false
 
 lazy val concurrency = (project in file("."))
   .settings(

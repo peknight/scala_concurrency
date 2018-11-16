@@ -6,7 +6,7 @@ import ExecutionContext.Implicits.global
 import scala.io.Source
 import scala.util.{Success, Failure}
 
-object futuresCallbacks extends App {
+object FuturesCallbacks extends App {
   def getUrlSpec(): Future[List[String]] = Future {
     val url = "http://www.w3.org/Addressing/URL/url-spec.txt"
     val f = Source.fromURL(url)
