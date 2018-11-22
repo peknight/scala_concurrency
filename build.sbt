@@ -19,6 +19,8 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-async" % "0.9.7"
 
 libraryDependencies += "org.scalaz" %% "scalaz-concurrent" % "7.2.27"
 
+//libraryDependencies += "com.github.scala-blitz" %% "scala-blitz" % "1.2"
+
 fork := false
 
 lazy val concurrency = (project in file("."))
