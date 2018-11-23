@@ -21,6 +21,8 @@ libraryDependencies += "org.scalaz" %% "scalaz-concurrent" % "7.2.27"
 
 //libraryDependencies += "com.github.scala-blitz" %% "scala-blitz" % "1.2"
 
+libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.20.7"
+
 fork := false
 
 lazy val concurrency = (project in file("."))
