@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch1
+package org.learningconcurrency
+package ch1
 
 class Printer(val greeting: String) {
   def printMessage(): Unit = println(greeting + "!")

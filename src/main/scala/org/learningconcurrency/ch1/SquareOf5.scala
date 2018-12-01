@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch1
+package org.learningconcurrency
+package ch1
 
 object SquareOf5 extends App {
   def square(x: Int): Int = x * x

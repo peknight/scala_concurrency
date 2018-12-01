@@ -1,6 +1,6 @@
-package org.learningconcurrency.ch2
+package org.learningconcurrency
+package ch2
 
-import org.learningconcurrency.learningconcurrency._
 import scala.collection._
 
 object SynchronizedBadPool extends App {

@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch2
+package org.learningconcurrency
+package ch2
 
 // 多个处理器无法总是以遍写程序的次序执行指令
 // 线程无须将他们的所有更新内容立刻写入主内存区域，但他们可以暂时将这些内容缓存在处理器的寄存器中。

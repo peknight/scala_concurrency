@@ -1,6 +1,5 @@
-package org.learningconcurrency.ch1
-
-import org.learningconcurrency.learningconcurrency._
+package org.learningconcurrency
+package ch1
 
 object Practice {
 

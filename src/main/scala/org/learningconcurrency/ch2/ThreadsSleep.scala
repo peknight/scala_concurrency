@@ -1,6 +1,5 @@
-package org.learningconcurrency.ch2
-
-import org.learningconcurrency.learningconcurrency._
+package org.learningconcurrency
+package ch2
 
 object ThreadsSleep extends App {
   val t = thread {

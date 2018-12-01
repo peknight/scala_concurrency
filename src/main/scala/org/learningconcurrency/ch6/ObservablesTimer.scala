@@ -1,6 +1,6 @@
-package org.learningconcurrency.ch6
+package org.learningconcurrency
+package ch6
 
-import org.learningconcurrency.learningconcurrency._
 import rx.lang.scala._
 import scala.concurrent.duration._
 

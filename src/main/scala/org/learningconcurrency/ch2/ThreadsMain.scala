@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch2
+package org.learningconcurrency
+package ch2
 
 object ThreadsMain extends App {
   val t: Thread = Thread.currentThread

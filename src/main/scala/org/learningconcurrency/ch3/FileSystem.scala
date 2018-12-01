@@ -1,6 +1,6 @@
-package org.learningconcurrency.ch3
+package org.learningconcurrency
+package ch3
 
-import org.learningconcurrency.learningconcurrency._
 import java.util.concurrent.{ConcurrentHashMap, LinkedBlockingQueue}
 
 import scala.collection.convert.decorateAsScala._

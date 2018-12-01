@@ -1,6 +1,5 @@
-package org.learningconcurrency.ch2
-
-import org.learningconcurrency.learningconcurrency._
+package org.learningconcurrency
+package ch2
 
 object ThreadsNondeterminism extends App {
   val t = thread( log("New thread running.") )

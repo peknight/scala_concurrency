@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch4
+package org.learningconcurrency
+package ch4
 
 import scala.concurrent._
 import ExecutionContext.Implicits.global

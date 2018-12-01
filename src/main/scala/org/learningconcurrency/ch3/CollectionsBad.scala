@@ -1,6 +1,5 @@
-package org.learningconcurrency.ch3
-
-import org.learningconcurrency.learningconcurrency._
+package org.learningconcurrency
+package ch3
 
 import scala.collection._
 

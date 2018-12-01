@@ -1,6 +1,5 @@
-package org.learningconcurrency.ch5
-
-import org.learningconcurrency.learningconcurrency._
+package org.learningconcurrency
+package ch5
 
 object CustomCharCount extends App {
   val txt = "A custom text " * 250000

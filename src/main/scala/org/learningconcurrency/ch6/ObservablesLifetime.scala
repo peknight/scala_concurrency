@@ -1,7 +1,7 @@
-package org.learningconcurrency.ch6
+package org.learningconcurrency
+package ch6
 
-import org.learningconcurrency.learningconcurrency._
-import rx.lang.scala.{Observable, Observer}
+import rx.lang.scala.Observable
 
 object ObservablesLifetime extends App {
   val classics = List("Good, bad, ugly", "Titanic", "Die Hard")

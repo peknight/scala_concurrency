@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch3
+package org.learningconcurrency
+package ch3
 
 import scala.collection.concurrent.Map
 import scala.collection.mutable

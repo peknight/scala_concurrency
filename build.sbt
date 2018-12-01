@@ -21,7 +21,11 @@ libraryDependencies += "org.scalaz" %% "scalaz-concurrent" % "7.2.27"
 
 //libraryDependencies += "com.github.scala-blitz" %% "scala-blitz" % "1.2"
 
+// 第六章
 libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.20.7"
+
+// 第六章 P176
+libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.0.3"
 
 fork := false
 

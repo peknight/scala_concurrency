@@ -1,6 +1,5 @@
-package org.learningconcurrency.ch3
-
-import org.learningconcurrency.learningconcurrency._
+package org.learningconcurrency
+package ch3
 
 object ExecutionContextSleep extends App {
   for (i <- 0 until 32) execute {

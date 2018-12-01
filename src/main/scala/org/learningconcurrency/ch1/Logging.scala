@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch1
+package org.learningconcurrency
+package ch1
 
 trait Logging {
   def log(s: String): Unit

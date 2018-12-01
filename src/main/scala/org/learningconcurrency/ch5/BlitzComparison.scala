@@ -1,6 +1,6 @@
-package org.learningconcurrency.ch5
+package org.learningconcurrency
+package ch5
 
-import org.learningconcurrency.learningconcurrency._
 //import scala.collection.par._
 //import scala.collection.par.Scheduler.Implicits.global
 

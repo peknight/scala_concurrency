@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch5
+package org.learningconcurrency
+package ch5
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.parallel.Combiner

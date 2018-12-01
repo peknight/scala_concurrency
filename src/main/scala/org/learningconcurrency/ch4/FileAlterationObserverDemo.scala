@@ -1,8 +1,8 @@
-package org.learningconcurrency.ch4
+package org.learningconcurrency
+package ch4
 
 import java.io.File
 
-import org.learningconcurrency.learningconcurrency._
 import org.apache.commons.io.monitor._
 import scala.concurrent._
 import ExecutionContext.Implicits.global

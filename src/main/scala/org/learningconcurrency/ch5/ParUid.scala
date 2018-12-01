@@ -1,8 +1,7 @@
-package org.learningconcurrency.ch5
+package org.learningconcurrency
+package ch5
 
-import org.learningconcurrency.learningconcurrency._
 import java.util.concurrent.atomic._
-import scala.collection._
 
 object ParUid extends App {
   private val uid = new AtomicLong(0L)
