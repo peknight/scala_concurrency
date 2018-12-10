@@ -13,6 +13,9 @@ resolvers ++= Seq(
     "http://repo.typesafe.com/typesafe/releases/"
 )
 
+// scalac参数打印详细编译信息
+scalacOptions += "-Xprint:typer"
+
 libraryDependencies += "commons-io" % "commons-io" % "2.4"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-async" % "0.9.7"
@@ -26,6 +29,9 @@ libraryDependencies += "com.netflix.rxjava" % "rxjava-scala" % "0.20.7"
 
 // 第六章 P176
 libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.0.3"
+
+// 第七章
+libraryDependencies += "org.scala-stm" %% "scala-stm" % "0.9"
 
 fork := false
 
