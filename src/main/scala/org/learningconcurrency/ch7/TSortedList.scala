@@ -179,4 +179,50 @@ object TSortedList extends App {
   for (h1 <- f1; h2 <- g1) log(s"Log for f: $h1\nlog for g: $h2")
 
   Thread.sleep(1000)
+
+//  val pages: Seq[String] = Seq.fill(5) ("Scala 2.10 is out, " * 7)
+//  val website: Array[Ref[String]] = pages.map(Ref(_)).toArray
+
+  val pages: Seq[String] = Seq.fill(5)("Scala 2.10 is out, " * 7)
+  val website: TArray[String] = TArray(pages)
+
+  def replace(p: String, s: String): Unit = atomic {
+    implicit txn =>
+      for (i <- 0 until website.length) {
+        website(i) = website(i).replace(p, s)
+      }
+  }
+
+  def asString = atomic {
+    implicit txn =>
+      var s: String = ""
+      for (i <- 0 until website.length)
+        s += s"Page $i\n======\n${website(i)}\n\n"
+      s
+  }
+
+  val f2 = Future {
+    replace("2.10", "2.11")
+  }
+  val g2 = Future {
+    replace("out", "released")
+  }
+  for (_ <- f2; _ <- g2) log(s"Document\n$asString")
+
+  Thread.sleep(1000)
+
+  val alphabet = TMap("a" -> 1, "B" -> 2, "C" -> 3)
+  Future {
+    atomic {
+      implicit txn =>
+        alphabet("A") = 1
+        alphabet.remove("a")
+    }
+  }
+  Thread.sleep(23)
+  Future {
+    val snap = alphabet.single.snapshot
+    log(s"atomic snapshot: $snap")
+  }
+  Thread.sleep(1000)
 }
