@@ -33,14 +33,6 @@ class TSortedList {
       this
   }
 
-  def pop(xs: TSortedList, n: Int): Unit = atomic {
-    implicit txn =>
-      var left = n
-      while (left > 0) {
-        xs.head() = xs.head().next()
-        left -= 1
-      }
-  }
 }
 object TSortedList extends App {
   import scala.concurrent._
@@ -49,5 +41,142 @@ object TSortedList extends App {
   val f = Future { sortedList.insert(1); sortedList.insert(4) }
   val g = Future { sortedList.insert(2); sortedList.insert(3) }
   for (_ <- f; _ <- g) log(s"sorted list - $sortedList")
+  Thread.sleep(1000)
+
+  val lst = new TSortedList
+  lst.insert(4).insert(9).insert(1).insert(16)
+  for (_ <- Future { pop(lst, 2) }) {
+    log(s"removed 2 elements; list = $lst")
+  }
+
+  import scala.util.Failure
+  Future { pop(lst, 3) } onComplete {
+    case Failure(t) => log(s"shoa $t; list = $lst")
+  }
+
+  Thread.sleep(1000)
+
+  Future {
+    atomic {
+      implicit txn =>
+        pop(lst, 1)
+        sys.error("")
+    }
+  } onComplete {
+    case Failure(t) => log(s"oops again $t - $lst")
+  }
+
+  Thread.sleep(1000)
+
+  import scala.util.control.Breaks._
+  Future {
+    breakable {
+      atomic {
+        implicit txn =>
+          for (n <- List(1, 2, 3)) {
+            pop(lst, n)
+            break
+          }
+      }
+    }
+    log(s"after removing - $lst")
+  }
+
+  Thread.sleep(1000)
+
+
+  import scala.util.control._
+  Future {
+    breakable {
+      atomic.withControlFlowRecognizer {
+        case c: ControlThrowable => false
+      } {
+        implicit txn =>
+          for (n <- List(1, 2, 3)) {
+            pop(lst, n)
+            break
+          }
+      }
+    }
+    log(s"after removing - $lst")
+  }
+
+  Thread.sleep(1000)
+
+  lst.insert(4).insert(9).insert(1)
+
+  atomic {
+    implicit txn =>
+      pop(lst, 2)
+      log(s"lst = $lst")
+      try { pop(lst, 3) }
+      catch { case e: Exception => log(s"Houston... $e!") }
+      pop(lst, 1)
+  }
+  log(s"result - $lst")
+
+  val queue1 = new TSortedList
+  val queue2 = new TSortedList
+  val consumer = Future {
+    blocking {
+      atomic {
+        implicit txn =>
+          log(s"probing queue1")
+          log(s"got: ${headWait(queue1)}")
+      } orAtomic {
+        implicit txn =>
+          log(s"probing queue2")
+          log(s"got: ${headWait(queue2)}")
+      }
+    }
+  }
+  Thread.sleep(50)
+  Future { queue2.insert(2) }
+  Thread.sleep(50)
+  Future { queue1.insert(1) }
+  Thread.sleep(1000)
+
+  val message = Ref("")
+  Future {
+    blocking {
+      atomic.withRetryTimeout(1000) {
+        implicit txn =>
+          if (message() != "") log(s"got a message - ${message()}")
+          else retry
+      }
+    }
+  }
+//  Thread.sleep(1024)
+  Thread.sleep(500)
+  message.single() = "Howdy!"
+  Thread.sleep(1000)
+
+  message.single() = ""
+  Future {
+    blocking {
+      atomic {
+        implicit txn =>
+          if (message() == "") {
+            retryFor(1000)
+            log(s"no message")
+          } else {
+            log(s"got message - ${message()}")
+          }
+      }
+    }
+  }
+  Thread.sleep(1000)
+
+  val myList = new TSortedList().insert(14).insert(22)
+  def clearWithLog(): String = atomic {
+    implicit txn =>
+      clearList(myList)
+      myLog()
+  }
+  val f1 = Future { clearWithLog() }
+  val g1 = Future { clearWithLog() }
+
+  for (h1 <- f1; h2 <- g1) log(s"Log for f: $h1\nlog for g: $h2")
+
   Thread.sleep(1000)
 }
