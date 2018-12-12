@@ -22,7 +22,7 @@ object Exercise1 extends App {
       atomic {
         implicit txn =>
           val oldP = p()
-          p() = e(q())
+          p() = q().asInstanceOf[P]
           q() = e(oldP)
       }
     }

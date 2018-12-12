@@ -14,7 +14,7 @@ resolvers ++= Seq(
 )
 
 // scalac参数打印详细编译信息
-scalacOptions += "-Xprint:typer"
+//scalacOptions += "-Xprint:typer"
 
 libraryDependencies += "commons-io" % "commons-io" % "2.4"
 
@@ -32,6 +32,12 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.0.3"
 
 // 第七章
 libraryDependencies += "org.scala-stm" %% "scala-stm" % "0.9"
+
+// 第八章
+libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-actor" % "2.5.19",
+  "com.typesafe.akka" %% "akka-testkit" % "2.5.19" % Test
+)
 
 fork := false
 
