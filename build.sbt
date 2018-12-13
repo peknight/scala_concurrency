@@ -36,7 +36,8 @@ libraryDependencies += "org.scala-stm" %% "scala-stm" % "0.9"
 // 第八章
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.5.19",
-  "com.typesafe.akka" %% "akka-testkit" % "2.5.19" % Test
+  "com.typesafe.akka" %% "akka-testkit" % "2.5.19" % Test,
+  "com.typesafe.akka" %% "akka-remote" % "2.5.19"
 )
 
 fork := false
