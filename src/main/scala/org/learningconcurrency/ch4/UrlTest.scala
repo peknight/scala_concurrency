@@ -15,7 +15,7 @@ import scala.io.Source
   */
 object UrlTest extends App {
   println("Please enter your url:")
-  val url = io.StdIn.readLine
+  val url = scala.io.StdIn.readLine
 
   val timer = new Timer(true)
   val result = Future { Source.fromURL(url).getLines.toList.mkString("\n") } or timeout(1000, "Time out")(timer)
