@@ -1,14 +1,9 @@
 package org.learningconcurrency
 
-import java.util.concurrent.Executor
-
 import rx.lang.scala._
-
-import scala.swing._
-import rx.schedulers.Schedulers.{from => fromExecutor}
-import javax.swing.SwingUtilities.invokeLater
 import rx.lang.scala.schedulers.IOScheduler
 
+import scala.swing._
 import scala.swing.event.{ButtonClicked, ValueChanged}
 
 package object ch6 {

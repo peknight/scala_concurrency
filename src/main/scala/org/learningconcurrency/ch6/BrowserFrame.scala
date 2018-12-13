@@ -1,4 +1,5 @@
-package org.learningconcurrency.ch6
+package org.learningconcurrency
+package ch6
 
 import scala.swing._
 
