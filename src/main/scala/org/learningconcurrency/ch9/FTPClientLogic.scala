@@ -1,24 +1,10 @@
 package org.learningconcurrency
 package ch9
 
-import scala.collection._
-import scala.util.{Try, Success, Failure}
-import scala.swing._
-import scala.swing.event._
-import javax.swing.table._
-import javax.swing._
-import javax.swing.border._
-import java.awt.Color
-import java.io.File
-import rx.lang.scala._
+
 import scala.concurrent._
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration._
-import akka.actor._
-import akka.pattern.{ask, pipe}
-import akka.util.Timeout
-import ch6._
-import scala.swing.Swing._
+import ExecutionContext.Implicits.global
+import scala.util._
 
 
 trait FTPClientLogic {
@@ -28,5 +14,22 @@ trait FTPClientLogic {
       swing {
         status.label.text = s"Could not connect: $t"
       }
+    case Success(false) =>
+      swing { status.label.text = "Could not find server."}
+    case Success(true) =>
+      swing {
+        status.label.text = "Connected!"
+        refreshPane(files.leftPane)
+        refreshPane(files.rightPane)
+      }
+  }
+  def refreshPane(pane: FilePane): Unit = {
+    val dir = pane.pathBar.filePath.text
+    getFileList(dir) onComplete {
+      case Success((dir, files)) =>
+        swing { updatePane(pane, dir, files) }
+      case Failure(t) =>
+        swing { status.label.text = s"Could not update pane: $t"}
+    }
   }
 }
