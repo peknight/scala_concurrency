@@ -40,6 +40,9 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-remote" % "2.5.19"
 )
 
+// 第九章
+libraryDependencies += "com.storm-enroute" %% "scalameter" % "0.10.1"
+
 fork := false
 
 lazy val concurrency = (project in file("."))

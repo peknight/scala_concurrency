@@ -7,6 +7,7 @@ import java.time.{Instant, ZoneId}
 import org.apache.commons.io.FileUtils
 
 case class FileInfo(path: String, name: String, parent: String, modified: String, isDir: Boolean, size: Long, state: State) {
+  def toRow = Array[AnyRef](name, if (isDir) "" else size / 1000 + "kB", modified)
   def toFile = new File(path)
 }
 

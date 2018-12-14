@@ -3,13 +3,16 @@ package ch9
 
 import akka.util._
 import akka.actor._
+import akka.event._
 import akka.pattern._
 import org.learningconcurrency.ch9.FTPServerActor.Command
+
 import scala.concurrent._
 import ExecutionContext.Implicits.global
 
 class FTPClientActor(implicit val timeout: Timeout) extends Actor {
   import FTPClientActor._
+  val log = Logging(context.system, this)
   def unconnected: Actor.Receive = {
     case Start(host) =>
       val serverActorPath = s"akka.tcp://FTPServerSystem@$host/user/server"
@@ -21,6 +24,7 @@ class FTPClientActor(implicit val timeout: Timeout) extends Actor {
   def connection(clientApp: ActorRef): Actor.Receive = {
     case ActorIdentity(_, Some(ref)) =>
       clientApp ! true
+      log.info("found: " + ref)
       context.become(connected(ref))
     case ActorIdentity(_, None) =>
       clientApp ! false

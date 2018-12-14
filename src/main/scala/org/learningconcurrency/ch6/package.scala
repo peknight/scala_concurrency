@@ -1,5 +1,7 @@
 package org.learningconcurrency
 
+import java.util.concurrent.Executor
+
 import rx.lang.scala._
 import rx.lang.scala.schedulers.IOScheduler
 
@@ -11,8 +13,15 @@ package object ch6 {
 //  val swingScheduler = new Scheduler {
 //    val asJavaScheduler = fromExecutor(invokeLater _)
 //  }
+  // 不过源代码是这样写的
+//  val swingScheduler = new Scheduler {
+//    val asJavaScheduler = rx.schedulers.Schedulers.from(new Executor {
+//      def execute(r: Runnable) = javax.swing.SwingUtilities.invokeLater(r)
+//    })
+//  }
   // 替换成这个就好用了
   val swingScheduler: Scheduler = IOScheduler()
+
 
   implicit class ButtonOps(val self: Button) {
     def clicks = Observable.create[Unit] {
